@@ -1,0 +1,17 @@
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.AssemblyInfo.cs
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\textGame.exe
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\textGame.deps.json
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\textGame.runtimeconfig.json
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\textGame.dll
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\textGame.pdb
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.dll
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\refint\textGame.dll
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.pdb
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.genruntimeconfig.cache
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\ref\textGame.dll
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.csproj.AssemblyReference.cache
+C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.csproj.CopyComplete
