@@ -15,3 +15,4 @@ C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\ref\textGame.dll
 C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.csproj.AssemblyReference.cache
 C:\Users\user\source\repos\textGame\textGame\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.csproj.CopyComplete
+C:\Users\user\source\repos\textGame\textGame\obj\Debug\net8.0\textGame.sourcelink.json

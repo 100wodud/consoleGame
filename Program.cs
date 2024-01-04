@@ -28,6 +28,7 @@ namespace textGame
         public int? Wep { get; set; }
         public int AddAstat { get; set; }
         public int AddDstat { get; set; }
+        public int Exp { get; set; }
     }
 
     public class Item
@@ -43,6 +44,18 @@ namespace textGame
         public string Explain { get; set; }
     }
 
+    public class Dungeon
+    {
+        //아이템 생성
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Armor { get; set; }
+        public int Damage { get; set; }
+        public int Gold { get; set; }
+        public int Level { get; set; }
+        public int AddGold { get; set; }
+        public int Exp { get; set; }
+    }
 
     class Program
     {
@@ -54,8 +67,47 @@ namespace textGame
         static Item weapon1 = new Item();
         static Item weapon2 = new Item();
         static Item weapon3 = new Item();
+        static Dungeon dungeon1 = new Dungeon();
+        static Dungeon dungeon2 = new Dungeon();
+        static Dungeon dungeon3 = new Dungeon();
         static List<Item> itemList = new List<Item>();
         static List<Item> myItem = new List<Item>();
+        static List<Dungeon> dungeons = new List<Dungeon>();
+
+        static void makeDungeon()
+        {
+            dungeon1.Id = 0;
+            dungeon1.Name = "쉬운 던전";
+            dungeon1.Armor = 0;
+            dungeon1.Damage = 15;
+            dungeon1.Gold = 1000;
+            dungeon1.Level = 1;
+            dungeon1.AddGold = 20;
+            dungeon1.Exp = 50;
+
+            dungeon2.Id = 1;
+            dungeon2.Name = "일반 던전";
+            dungeon2.Armor = 15;
+            dungeon2.Damage = 30;
+            dungeon2.Gold = 2000;
+            dungeon2.Level = 5;
+            dungeon2.AddGold = 25;
+            dungeon2.Exp = 100;
+
+            dungeon3.Id = 2;
+            dungeon3.Name = "어려운 던전";
+            dungeon3.Armor = 30;
+            dungeon3.Damage = 50;
+            dungeon3.Gold = 3000;
+            dungeon3.AddGold = 35;
+            dungeon3.Level = 10;
+            dungeon3.Exp = 200;
+
+            dungeons.Add(dungeon1);
+            dungeons.Add(dungeon2);
+            dungeons.Add(dungeon3);
+        }
+
         static void makeItem()
         {
             armor1.Id = 0;
@@ -104,11 +156,22 @@ namespace textGame
             weapon2.Explain = "어디선가 사용됐던거 같은 도끼";
             weapon2.Equip = false;
 
+
+            weapon3.Id = 5;
+            weapon3.Name = "스파르타의 창";
+            weapon3.Type = 2;
+            weapon3.stat = 7;
+            weapon3.Sold = true;
+            weapon3.Gold = 4000;
+            weapon3.Explain = "스파르타의 전사들이 사용했다는 전설의 창입니다.";
+            weapon3.Equip = false;
+
             itemList.Add(armor1);
             itemList.Add(armor2);
             itemList.Add(armor3);
             itemList.Add(weapon1);
             itemList.Add(weapon2);
+            itemList.Add(weapon3);
         }
         static void makePlayer()
         {
@@ -117,10 +180,12 @@ namespace textGame
             player.Class = "전사";
             player.Power = 10;
             player.Hp = 100;
-            player.Gold = 15000;
+            player.Gold = 1500;
             player.Arm = null;
+            player.Wep = null;
             player.AddAstat = 0;
             player.AddDstat = 0;
+            player.Exp = 0;
         }
         static void Start()
         {
@@ -131,8 +196,10 @@ namespace textGame
             Console.WriteLine("1. 상태 보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
-            Console.WriteLine("4. 세이브");
-            Console.WriteLine("5. 로드\n");
+            Console.WriteLine("4. 던전입장");
+            Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("6. 세이브");
+            Console.WriteLine("7. 로드\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             string choice = Console.ReadLine();
 
@@ -156,9 +223,17 @@ namespace textGame
             }
             else if (num == 4)
             {
-                Save();
+                Dungeon();
             }
             else if (num == 5)
+            {
+                rest();
+            }
+            else if (num == 6)
+            {
+                Save();
+            }
+            else if (num == 7)
             {
                 Load();
             }
@@ -217,7 +292,7 @@ namespace textGame
             Console.WriteLine("캐릭터의 정보가 표시됩니다.\n");
             Console.WriteLine($"Lv. {player.Level}");
             Console.WriteLine($"chad < {player.Class} >");
-            Console.WriteLine($"공격력 :  {player.Power} (+{player.AddDstat})");
+            Console.WriteLine($"공격력 : {player.Power} (+{player.AddDstat})");
             Console.WriteLine($"방어력 : {player.Armor} (+{player.AddAstat})");
             Console.WriteLine($"체력 : {player.Hp}");
             Console.WriteLine($"Gold : {player.Gold} G\n");
@@ -645,10 +720,258 @@ namespace textGame
             }
         }
 
+        static void Dungeon()
+        {
+            Console.Clear();
+            int num;
+            Console.WriteLine("던전입장");
+            Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.\n");
+
+            Console.Write("[현재 체력]");
+            Console.Write($" {player.Hp}\n");
+            Console.Write("[현재 방어력]");
+            Console.Write($"{player.Armor} (+{player.AddAstat})");
+            Console.Write("[현재 공격력]");
+            Console.Write($"{player.Power} (+{player.AddDstat})\n\n");
+
+            int i = 0;
+            foreach (var dungeon in dungeons)
+            {
+                Console.Write($"{dungeon.Id + 1}.");
+                Console.Write($"{dungeon.Name}     | ");
+                Console.Write($"방어력 {dungeon.Armor} 이상 권장    | ");
+                Console.Write($"레벨 {dungeon.Level} 입장 가능\n");
+                i++;
+            }
+
+            Console.WriteLine("\n0. 나가기\n");
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+            string choice = Console.ReadLine();
+            bool res = int.TryParse(choice, out num);
+            if (!res || num > i)
+            {
+                Console.WriteLine("\n잘못된 입력입니다.\n");
+                Thread.Sleep(500);
+                Dungeon();
+            } 
+            else if (num == 0)
+            {
+                Start();
+            }
+            else if (dungeons[num - 1] != null)
+            {
+                if (dungeons[num - 1].Level <= player.Level)
+                {
+                    dungeonClear(num - 1);
+                } else
+                {
+                    Console.WriteLine("입장 레벨이 아닙니다.");
+                    Thread.Sleep(500);
+                    Dungeon();
+                }
+            } else
+            {
+                Console.WriteLine("\n잘못된 입력입니다.\n");
+                Thread.Sleep(500);
+                Dungeon();
+            }
+
+            static void dungeonClear(int dun)
+            {
+                Console.Clear();
+                int num; 
+                Random randomObj = new Random();
+                int random = randomObj.Next(0, 101);
+                if (dungeons[dun].Armor > player.Armor + player.AddAstat && random <= 40)
+                {
+                    Fail(dun);
+                } else
+                {
+                    Succece(dun);
+                }
+
+
+                Console.WriteLine("\n0. 나가기\n");
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">>");
+                string choice = Console.ReadLine();
+                bool res = int.TryParse(choice, out num);
+                if (!res)
+                {
+                    Console.WriteLine("\n잘못된 입력입니다.\n");
+                    Thread.Sleep(500);
+                    Dungeon();
+                }
+                else if (num == 0)
+                {
+                    Dungeon();
+                } else
+                {
+                    Console.WriteLine("\n잘못된 입력입니다.\n");
+                    Thread.Sleep(500);
+                    Dungeon();
+                }
+
+
+                static void Succece(int dun)
+                {
+                    int ranHp = 0;
+                    int ranDam = 0;
+                    Random randomObj = new Random();
+                    ranHp = randomObj.Next(19, 36) - player.AddAstat - player.Armor + dungeons[dun].Armor;
+                    Random randomObj2 = new Random();
+                    ranDam = randomObj2.Next(1, 36) + player.AddDstat + player.Power - dungeons[dun].Damage;
+
+                    if (ranHp < 0)
+                    {
+                        ranHp = 1;
+                    }
+
+                    if (ranHp >= player.Hp) 
+                    {
+                        Fail(dun);
+                    } else
+                    {
+                        if (ranDam > dungeons[dun].AddGold)
+                        {
+
+                            ranDam = dungeons[dun].AddGold;
+                        } else if (ranDam < 0)
+                        {
+                            ranDam = 0;
+                        }
+
+                        double ranGold = (double)dungeons[dun].Gold * (ranDam / 100.00 + 1.00);
+
+
+                        Console.WriteLine("던전 클리어");
+                        Console.WriteLine("축하합니다!!");
+                        Console.WriteLine($"{dungeons[dun].Name}을 클리어 하였습니다.\n");
+
+                        Console.WriteLine("[탐험 결과]");
+                        Console.Write("체력");
+                        Console.Write($" {player.Hp} -> {player.Hp - ranHp} \n");
+                        Console.Write("Gold");
+                        Console.Write($" {player.Gold} -> {player.Gold + Convert.ToInt32(Math.Round(ranGold))} \n\n");
+
+
+                        player.Hp = player.Hp - ranHp;
+                        player.Gold = player.Gold + Convert.ToInt32(Math.Round(ranGold));
+                        player.Exp = player.Exp + dungeons[dun].Exp;
+                        double expCount = Math.Pow(player.Exp / 25, 0.4) * 49 / 50 + 1;
+
+                        int level = Convert.ToInt32(Math.Floor(expCount));
+                        if(level > player.Level)
+                        {
+                            Console.WriteLine("\n★레벨업\n");
+                            Console.Write("레벨");
+                            Console.Write($" {player.Level} -> {level} \n");
+                            Console.Write("공격력");
+                            Console.Write($" {player.Power} -> {level + player.Power} \n");
+                            Console.Write("방어력");
+                            Console.Write($" {player.Armor} -> {level + player.Armor} \n\n");
+                            Console.WriteLine("체력이 회복되었습니다\n");
+                            player.Level = level;
+                            player.Power = level + player.Power;
+                            player.Armor = level + player.Armor;
+                            player.Hp = 100;
+                        }
+
+                    }
+
+                    
+                }
+                static void Fail(int dun)
+                {
+                    Random randomObj = new Random();
+                    int ran = randomObj.Next(0, 51);
+
+                    double ranGold = (double)player.Gold * (ran / 1000.00);
+
+                    Console.WriteLine("던전 실패");
+                    Console.WriteLine($"{dungeons[dun].Name} 클리어에 실패하였습니다.\n");
+
+                    Console.WriteLine("[탐험 결과]");
+                    Console.Write("체력");
+                    Console.Write($" {player.Hp} -> 0 \n");
+                    Console.Write("Gold");
+                    Console.Write($" {player.Gold} -> {player.Gold - Convert.ToInt32(Math.Round(ranGold))} \n");
+
+                    player.Hp = 0;
+                    player.Gold = player.Gold - Convert.ToInt32(Math.Round(ranGold));
+                }
+
+            }
+        }
+
+        static void rest()
+        {
+            Console.Clear();
+            int num;
+            Console.WriteLine("휴식하기");
+            Console.WriteLine("500 G 를 내면 체력을 회복할 수 있습니다.\n");
+
+            Console.Write("[현재 골드]");
+            Console.Write($" {player.Gold}G\n");
+
+            Console.Write("[현재 체력]");
+            Console.Write($" {player.Hp}\n");
+
+
+            Console.WriteLine("\n1. 휴식하기");
+            Console.WriteLine("0. 나가기\n");
+            Console.WriteLine("원하시는 행동을 입력해주세요.\n");
+            Console.Write(">>");
+            string choice = Console.ReadLine();
+
+            bool res = int.TryParse(choice, out num);
+            if (!res)
+            {
+                Console.WriteLine("\n잘못된 입력입니다.\n");
+                Thread.Sleep(500);
+                rest();
+            }
+            else if (num == 0)
+            {
+                Start();
+            }
+            else if (num == 1)
+            {
+                if(player.Gold < 500)
+                {
+                    Console.WriteLine("\nGold가 부족합니다.\n");
+                    Thread.Sleep(500);
+                    rest();
+                } 
+                else if (player.Hp >= 100)
+                {
+                    Console.WriteLine("\n이미 체력이 가득차 있습니다.\n");
+                    Thread.Sleep(500);
+                    rest();
+                }
+                else
+                {
+                    Console.WriteLine("\n휴식을 완료했습니다\n");
+                    player.Hp = 100;
+                    player.Gold = player.Gold - 500;
+                    Thread.Sleep(500);
+                    rest();
+                }
+            } else
+            {
+                Console.WriteLine("\n잘못된 입력입니다.\n");
+                Thread.Sleep(500);
+                rest();
+            }
+
+        }
+
         static void Main(string[] args)
         {
             makeItem();
             makePlayer();
+            makeDungeon();
             Start();
         }
     }
