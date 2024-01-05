@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace textGame
 {
+    // 플레이어 생성
     public class Player
     {
-        //캐릭터 생성
+        //플레이어 이름 / 레벨 / 직업 / 공격력 / 방어력 / 체력 / 소지골드 / 장착방어구 / 장착무기 / 추가방스텟 / 추가공스텟 / 경험치 
         public string Name { get; set; }
         public int Level { get; set; }
         public string Class { get; set; }

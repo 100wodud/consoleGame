@@ -8,6 +8,7 @@ namespace textGame
 {
     public class Dungeons
     {
+        //던전넘버링 / 던전이름 / 던전 필요 방어력 / 던전 필요 공격력 / 획득골드 / 제한레벨 / 추가골드제한 / 경험치획득량
         public int Id { get; set; }
         public string Name { get; set; }
         public int Armor { get; set; }

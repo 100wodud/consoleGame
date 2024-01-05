@@ -8,7 +8,7 @@ namespace textGame
 {
     public class Item
     {
-        //아이템 생성
+        //아이템 넘버링 / 아이템이름 / 아이템타입(1:방어구,2:무기) / 추가스텟 / 가격 / 구매가능여부 / 착용중 / 설명
         public int Id { get; set; }
         public string Name { get; set; }
         public int Type { get; set; }
