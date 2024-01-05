@@ -8,6 +8,7 @@ namespace textGame
 {
     public class Dungeons
     {
+        //던전넘버링 / 던전이름 / 던전 필요 방어력 / 던전 필요 공격력 / 획득골드 / 제한레벨 / 추가골드제한 / 경험치획득량
         public int Id { get; set; }
         public string Name { get; set; }
         public int Armor { get; set; }
@@ -35,8 +36,8 @@ namespace textGame
 
             dungeon2.Id = 1;
             dungeon2.Name = "일반 던전";
-            dungeon2.Armor = 15;
-            dungeon2.Damage = 30;
+            dungeon2.Armor = 12;
+            dungeon2.Damage = 40;
             dungeon2.Gold = 2000;
             dungeon2.Level = 5;
             dungeon2.AddGold = 25;
@@ -44,7 +45,7 @@ namespace textGame
 
             dungeon3.Id = 2;
             dungeon3.Name = "어려운 던전";
-            dungeon3.Armor = 30;
+            dungeon3.Armor = 25;
             dungeon3.Damage = 50;
             dungeon3.Gold = 3000;
             dungeon3.AddGold = 35;

@@ -13,10 +13,9 @@ using System.Xml.Linq;
 
 namespace textGame
 {
-
-    
     class Program
     {
+        // 처음 스타트 화면
         static void Start()
         {
             Console.Clear();
@@ -75,8 +74,10 @@ namespace textGame
             }
         }
 
+        // 세이브 기능
         static void Save()
         {
+            //리스트 json 파일에 저장
             List<Player> savePlayer = new List<Player>();
             savePlayer.Add(Player.player);
             string itemLists = JsonConvert.SerializeObject(Item.itemList);
@@ -89,6 +90,8 @@ namespace textGame
             File.WriteAllText(@"F:\charInfo.json", charInfo);
             Start();
         }
+
+        // 로드 기능
         static void Load()
         {
             
@@ -114,6 +117,8 @@ namespace textGame
             Start();
 
         }
+
+        // 캐릭터 스테이터스 창
         static void Status()
         {
             Console.Clear();
@@ -144,6 +149,7 @@ namespace textGame
             }
         }
 
+        // 상점
         static void Store()
         {
             Console.Clear();
@@ -154,6 +160,8 @@ namespace textGame
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{Player.player.Gold}G\n");
             Console.WriteLine("[아이템 목록]");
+
+            // 아이템의 타입이 1이면 방어구 2이면 무기
             foreach (var item in Item.itemList)
             {
 
@@ -211,6 +219,7 @@ namespace textGame
 
         }
 
+        // 아이템 구매
         static void buyingItem()
         {
             Console.Clear();
@@ -262,6 +271,7 @@ namespace textGame
             else if(num == 0){
                 Store();
             }
+            // Item.itemList[num -1] 안에 값이 존재 && Item.itemList[num -1]가 팔렸는지 여부 && 플레이어의 골드가 부족하지 않을 때
             else if (Item.itemList[num -1] != null && Item.itemList[num - 1].Sold && Player.player.Gold - Item.itemList[num - 1].Gold >= 0)
             {
                 Item.itemList[num - 1].Sold = false;
@@ -282,6 +292,8 @@ namespace textGame
                 buyingItem();
             }
         }
+
+        // 아이템 판매
         static void sellingItem()
         {
             Console.Clear();
@@ -355,6 +367,7 @@ namespace textGame
             }
         }
 
+        // 인벤토리
         static void Inventory()
         {
             Console.Clear();
@@ -417,6 +430,7 @@ namespace textGame
             }
         }
 
+        // 아이템 장착
         static void Equipment()
         {
             Console.Clear();
@@ -550,6 +564,7 @@ namespace textGame
             }
         }
 
+        // 던전 입장
         static void Dungeon()
         {
             Console.Clear();
@@ -607,6 +622,8 @@ namespace textGame
                 Dungeon();
             }
 
+
+            // 던전 클리어
             static void dungeonClear(int dun)
             {
                 Console.Clear();
@@ -643,7 +660,7 @@ namespace textGame
                     Dungeon();
                 }
 
-
+                // 던전 클리어 성공
                 static void Succece(int dun)
                 {
                     int ranHp = 0;
@@ -689,29 +706,31 @@ namespace textGame
                         Player.player.Hp = Player.player.Hp - ranHp;
                         Player.player.Gold = Player.player.Gold + Convert.ToInt32(Math.Round(ranGold));
                         Player.player.Exp = Player.player.Exp + Dungeons.dungeons[dun].Exp;
-                        double expCount = Math.Pow(Player.player.Exp / 25, 0.4) * 49 / 50 + 1;
 
+                        // 경험치 총량으로 레벨 계산법
+                        double expCount = Math.Pow(Player.player.Exp / 25, 0.4) * 49 / 50 + 1;
                         int level = Convert.ToInt32(Math.Floor(expCount));
+
                         if(level > Player.player.Level)
                         {
                             Console.WriteLine("\n★레벨업\n");
                             Console.Write("레벨");
                             Console.Write($" {Player.player.Level} -> {level} \n");
                             Console.Write("공격력");
-                            Console.Write($" {Player.player.Power} -> {level + Player.player.Power} \n");
+                            Console.Write($" {Player.player.Power} -> {1 + Player.player.Power} \n");
                             Console.Write("방어력");
-                            Console.Write($" {Player.player.Armor} -> {level + Player.player.Armor} \n\n");
+                            Console.Write($" {Player.player.Armor} -> {1 + Player.player.Armor} \n\n");
                             Console.WriteLine("체력이 회복되었습니다\n");
                             Player.player.Level = level;
-                            Player.player.Power = level + Player.player.Power;
-                            Player.player.Armor = level + Player.player.Armor;
+                            Player.player.Power++;
+                            Player.player.Armor++;
                             Player. player.Hp = 100;
                         }
 
-                    }
-
-                    
+                    }                   
                 }
+
+                // 던전 클리어 실패
                 static void Fail(int dun)
                 {
                     Random randomObj = new Random();
@@ -735,6 +754,7 @@ namespace textGame
             }
         }
 
+        // 휴식하기
         static void rest()
         {
             Console.Clear();
@@ -799,6 +819,7 @@ namespace textGame
 
         static void Main(string[] args)
         {
+            // 플레이어, 아이템, 던전 생성 후 첫화면 로드
             Item.makeItem();
             Player.makePlayer();
             Dungeons.makeDungeon();
