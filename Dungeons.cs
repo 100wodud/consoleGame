@@ -36,8 +36,8 @@ namespace textGame
 
             dungeon2.Id = 1;
             dungeon2.Name = "일반 던전";
-            dungeon2.Armor = 15;
-            dungeon2.Damage = 30;
+            dungeon2.Armor = 12;
+            dungeon2.Damage = 40;
             dungeon2.Gold = 2000;
             dungeon2.Level = 5;
             dungeon2.AddGold = 25;
@@ -45,7 +45,7 @@ namespace textGame
 
             dungeon3.Id = 2;
             dungeon3.Name = "어려운 던전";
-            dungeon3.Armor = 30;
+            dungeon3.Armor = 25;
             dungeon3.Damage = 50;
             dungeon3.Gold = 3000;
             dungeon3.AddGold = 35;

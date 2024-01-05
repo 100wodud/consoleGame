@@ -717,13 +717,13 @@ namespace textGame
                             Console.Write("레벨");
                             Console.Write($" {Player.player.Level} -> {level} \n");
                             Console.Write("공격력");
-                            Console.Write($" {Player.player.Power} -> {level + Player.player.Power} \n");
+                            Console.Write($" {Player.player.Power} -> {1 + Player.player.Power} \n");
                             Console.Write("방어력");
-                            Console.Write($" {Player.player.Armor} -> {level + Player.player.Armor} \n\n");
+                            Console.Write($" {Player.player.Armor} -> {1 + Player.player.Armor} \n\n");
                             Console.WriteLine("체력이 회복되었습니다\n");
                             Player.player.Level = level;
-                            Player.player.Power = level + Player.player.Power;
-                            Player.player.Armor = level + Player.player.Armor;
+                            Player.player.Power++;
+                            Player.player.Armor++;
                             Player. player.Hp = 100;
                         }
 
